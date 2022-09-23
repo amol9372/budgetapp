@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.budget.tracker</groupId>
 	<artifactId>budgetapp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>budgetapp</name>
 	<description>Budget Tracker Application</description>
 	<properties>

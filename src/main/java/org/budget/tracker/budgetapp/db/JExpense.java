@@ -14,6 +14,8 @@ import java.util.List;
 @TypeDef(name = "json", typeClass = JsonType.class)
 public class JExpense {
 
+    @Id
+    @GeneratedValue
     private Integer id;
 
     private float cost;
