@@ -2,7 +2,7 @@ package org.budget.tracker.budgetapp.app;
 
 enum Category {
 
-    GROCERY("groceries"), GENERAL("general"), ELECTRONICS("electronics"), RENT("rent"), DINING("dining");
+    GROCERY("groceries"), GENERAL("general"), ELECTRONICS("electronics"), RENT("rent"), DINING("dining"), STARBUCKS("starbucks"), TIM_HORTONS("tim-hortons");
 
     private final String value;
 
@@ -10,7 +10,7 @@ enum Category {
         this.value = value;
     }
 
-    public String getValue(){
+    public String getValue() {
         return this.value;
     }
 }

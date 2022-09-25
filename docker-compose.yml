@@ -18,7 +18,7 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - '9092:9092'
+      - "9092:9092"
     expose:
       - '29092'
     environment:

@@ -1,3 +1,6 @@
+server:
+  port: 8082
+
 spring:
   datasource:
     url: jdbc:h2:mem:mydb
@@ -10,6 +13,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+#    generate-ddl: true
   #    database: h2
   #    properties:
 #      hibernate:

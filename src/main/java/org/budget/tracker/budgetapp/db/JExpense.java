@@ -10,19 +10,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "expenses")
+@Table(name = "expenses", schema = "budget_tracker")
 @TypeDef(name = "json", typeClass = JsonType.class)
 public class JExpense {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private float cost;
 
     private String name;
 
-    @Column(name = "category_id")
+    @Column(name = "category")
     private String category;
 
     @Column(name = "created_by")

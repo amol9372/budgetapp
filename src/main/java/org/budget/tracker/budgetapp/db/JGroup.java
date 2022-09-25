@@ -3,11 +3,11 @@ package org.budget.tracker.budgetapp.db;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "groups")
+@Table(name = "groups", schema = "budget_tracker")
 public class JGroup {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
