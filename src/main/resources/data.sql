@@ -1,11 +1,9 @@
-insert into budget_tracker.category (name, created_on) values ('groceries', now());
-insert into budget_tracker.category (name, created_on) values ('general', now());
-insert into budget_tracker.category (name, created_on) values ('electronics', now());
-insert into budget_tracker.category (name, created_on) values ('sports', now());
 insert into budget_tracker.category (name, created_on) values ('rent', now());
-insert into budget_tracker.category (name, created_on) values ('dining', now());
-insert into budget_tracker.category (name, created_on) values ('starbucks', now());
-insert into budget_tracker.category (name, created_on) values ('tim-hortons', now());
+insert into budget_tracker.category (name, created_on) values ('electricity', now());
+insert into budget_tracker.category (name, created_on) values ('water', now());
+insert into budget_tracker.category (name, created_on) values ('cellular', now());
+insert into budget_tracker.category (name, created_on) values ('wifi', now());
+
 
 
 

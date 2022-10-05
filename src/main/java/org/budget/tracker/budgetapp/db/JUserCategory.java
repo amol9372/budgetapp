@@ -4,24 +4,26 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "category", schema = "budget_tracker")
-public class JCategory {
+@Table(name = "user_categories")
+public class JUserCategory {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+  @Column(name = "user_id")
+  private Integer userId;
 
   private String name;
 
   @Column(name = "created_on")
   private LocalDateTime createdOn;
 
+  @Column(name = "updated_on")
+  private LocalDateTime updatedOn;
+
   public Integer getId() {
     return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -32,11 +34,31 @@ public class JCategory {
     this.name = name;
   }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
+
   public LocalDateTime getCreatedOn() {
     return createdOn;
   }
 
   public void setCreatedOn(LocalDateTime createdOn) {
     this.createdOn = createdOn;
+  }
+
+  public LocalDateTime getUpdatedOn() {
+    return updatedOn;
+  }
+
+  public void setUpdatedOn(LocalDateTime updatedOn) {
+    this.updatedOn = updatedOn;
   }
 }
