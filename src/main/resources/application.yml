@@ -25,7 +25,7 @@ spring:
     url: ${POSTGRES_URL}
     hikari:
       schema: budget_tracker
-    username: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
   h2:

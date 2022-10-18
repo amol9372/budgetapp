@@ -8,6 +8,8 @@ public class CreateBudgetRequest extends BaseRequest{
   private String createdBy; // email
   private String cycle;
 
+  private Double moneyAvailable;
+
   public String getName() {
     return name;
   }
@@ -46,5 +48,13 @@ public class CreateBudgetRequest extends BaseRequest{
 
   public void setCycle(String cycle) {
     this.cycle = cycle;
+  }
+
+  public Double getMoneyAvailable() {
+    return moneyAvailable;
+  }
+
+  public void setMoneyAvailable(Double moneyAvailable) {
+    this.moneyAvailable = moneyAvailable;
   }
 }

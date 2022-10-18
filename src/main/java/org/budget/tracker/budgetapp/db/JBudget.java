@@ -18,6 +18,9 @@ public class JBudget {
   @Column(name = "money_assigned")
   private Double moneyAssigned;
 
+  @Column(name = "money_available")
+  private Double moneyAvailable;
+
   @Column(name = "user_id")
   private Integer userId;
 
@@ -92,5 +95,13 @@ public class JBudget {
 
   public void setUpdatedOn(LocalDateTime updatedOn) {
     this.updatedOn = updatedOn;
+  }
+
+  public Double getMoneyAvailable() {
+    return moneyAvailable;
+  }
+
+  public void setMoneyAvailable(Double moneyAvailable) {
+    this.moneyAvailable = moneyAvailable;
   }
 }

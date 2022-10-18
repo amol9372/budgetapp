@@ -18,7 +18,7 @@ public class JCategoryBudget {
   @Column(name = "user_defined")
   private Boolean userDefined;
 
-  @Column(name = "catgory_id")
+  @Column(name = "category_id")
   private Integer categoryId;
 
   @Column(name = "allocated")

@@ -3,7 +3,7 @@ package org.budget.tracker.budgetapp.app;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Budget {
+public class Budget extends BaseAppEntity {
 
   private String name;
   private String currency;
@@ -11,7 +11,6 @@ public class Budget {
   private BigDecimal moneyAssigned;
   private String monthYear;
   private LocalDateTime createdOn;
-
   private String createdBy; // email
 
   private String cycle; // EOM  or Pro-rate

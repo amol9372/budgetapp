@@ -1,18 +1,23 @@
 package org.budget.tracker.budgetapp.app;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class CategoryBudget {
+public class CategoryBudget extends BaseAppEntity {
 
   private String name;
   private Boolean userDefined;
   private BigDecimal allocated;
   private BigDecimal used;
+
+  private Integer budgetId;
   private LocalDateTime lastUpdated;
   // TODO last operation
   // TODO status
-  private String spending;
+  private Boolean autoDeduct;
+
+  private LocalDate autoDeductOn;
 
   public String getName() {
     return name;
@@ -54,11 +59,27 @@ public class CategoryBudget {
     this.lastUpdated = lastUpdated;
   }
 
-  public String getSpending() {
-    return spending;
+  public Boolean getAutoDeduct() {
+    return autoDeduct;
   }
 
-  public void setSpending(String spending) {
-    this.spending = spending;
+  public void setAutoDeduct(Boolean autoDeduct) {
+    this.autoDeduct = autoDeduct;
+  }
+
+  public LocalDate getAutoDeductOn() {
+    return autoDeductOn;
+  }
+
+  public void setAutoDeductOn(LocalDate autoDeductOn) {
+    this.autoDeductOn = autoDeductOn;
+  }
+
+  public Integer getBudgetId() {
+    return budgetId;
+  }
+
+  public void setBudgetId(Integer budgetId) {
+    this.budgetId = budgetId;
   }
 }

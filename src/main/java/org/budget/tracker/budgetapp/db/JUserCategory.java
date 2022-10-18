@@ -11,10 +11,13 @@ public class JUserCategory {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  private String name;
+
   @Column(name = "user_id")
   private Integer userId;
 
-  private String name;
+  @Column(name = "budget_id")
+  private Integer budgetId;
 
   @Column(name = "created_on")
   private LocalDateTime createdOn;
@@ -26,6 +29,10 @@ public class JUserCategory {
     return id;
   }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
   public String getName() {
     return name;
   }
@@ -34,16 +41,20 @@ public class JUserCategory {
     this.name = name;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
   public Integer getUserId() {
     return userId;
   }
 
   public void setUserId(Integer userId) {
     this.userId = userId;
+  }
+
+  public Integer getBudgetId() {
+    return budgetId;
+  }
+
+  public void setBudgetId(Integer budgetId) {
+    this.budgetId = budgetId;
   }
 
   public LocalDateTime getCreatedOn() {

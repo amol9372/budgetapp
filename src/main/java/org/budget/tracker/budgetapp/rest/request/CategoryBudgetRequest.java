@@ -7,7 +7,8 @@ public class CategoryBudgetRequest extends BaseRequest {
 
   private String category;
   private Boolean userDefined;
-  private BigDecimal allocation;
+  private BigDecimal allocated;
+  private BigDecimal used;
   private Integer budgetId;
   private Boolean autoDeduct;  // auto deductible
   private LocalDate autoDeductionOn;  // auto deduction date
@@ -28,12 +29,12 @@ public class CategoryBudgetRequest extends BaseRequest {
     this.userDefined = userDefined;
   }
 
-  public BigDecimal getAllocation() {
-    return allocation;
+  public BigDecimal getAllocated() {
+    return allocated;
   }
 
-  public void setAllocation(BigDecimal allocation) {
-    this.allocation = allocation;
+  public void setAllocated(BigDecimal allocated) {
+    this.allocated = allocated;
   }
 
   public Integer getBudgetId() {
@@ -58,5 +59,13 @@ public class CategoryBudgetRequest extends BaseRequest {
 
   public void setAutoDeductionOn(LocalDate autoDeductionOn) {
     this.autoDeductionOn = autoDeductionOn;
+  }
+
+  public BigDecimal getUsed() {
+    return used;
+  }
+
+  public void setUsed(BigDecimal used) {
+    this.used = used;
   }
 }

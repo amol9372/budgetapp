@@ -10,18 +10,29 @@ import java.util.List;
 
 @RestController
 @RequestMapping("category-budget")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 public class CategoryBudgetController {
 
   @Autowired BudgetCategoryService budgetCategoryService;
 
-  // assign budget to a category OR
   @PostMapping
   public void allocateBudget(@RequestBody CategoryBudgetRequest request) {
-    budgetCategoryService.upsertBudgetCategory(request);
+    budgetCategoryService.createBudgetCategory(request);
   }
 
-  @GetMapping
-  public List<CategoryBudget> categoryBudgets() {
-    return null;
+  @PostMapping("{categoryId}")
+  public void editCategoryAllocation(@PathVariable Integer categoryId, @RequestBody CategoryBudgetRequest request) {
+    budgetCategoryService.editBudgetCategory(categoryId, request);
+  }
+
+  @GetMapping("{budgetId}")
+  public List<CategoryBudget> fetchCategoryBudgets(@PathVariable Integer budgetId) {
+
+    return budgetCategoryService.getCategoryBudgets(budgetId);
+  }
+
+  @DeleteMapping("{categoryId}")
+  public void deleteCategoryBudget(@PathVariable Integer categoryId){
+    budgetCategoryService.deleteCategoryBudget(categoryId);
   }
 }
