@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("budget")
-@CrossOrigin(origins = "http://localhost:3000, https://budget-tracker-4de96.web.app", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000, https://budget-tracker-4de96.web.app"}, allowedHeaders = "*", allowCredentials = "true")
 //@CrossOrigin("*")
 public class BudgetController {
 
