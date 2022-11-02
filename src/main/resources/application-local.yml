@@ -1,0 +1,46 @@
+server:
+  port: 8082
+#  tomcat:
+#    threads:
+#      max: 1
+
+spring:
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    username: sa
+#    password: password
+#    driverClassName: org.h2.Driver
+#    embedded-database-connection:
+#  jpa:
+#    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+#    defer-datasource-initialization: true
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
+
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_URL}
+    hikari:
+      schema: budget_tracker
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: embedded
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+logging:
+  level:
+    root: debug

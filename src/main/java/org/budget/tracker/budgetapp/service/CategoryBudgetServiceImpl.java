@@ -1,5 +1,7 @@
 package org.budget.tracker.budgetapp.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.budget.tracker.budgetapp.app.CategoryBudget;
 import org.budget.tracker.budgetapp.builder.BudgetBuilder;
 import org.budget.tracker.budgetapp.builder.CategoryBudgetBuilder;
@@ -22,6 +24,8 @@ import java.util.Optional;
 
 @Service
 public class CategoryBudgetServiceImpl implements BudgetCategoryService {
+
+  private final Logger logger = LogManager.getLogger(this.getClass());
 
   @Autowired CategoryBudgetJpaRepository categoryBudgetJpaRepository;
 

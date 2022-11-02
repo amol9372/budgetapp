@@ -1,5 +1,7 @@
 package org.budget.tracker.budgetapp.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.budget.tracker.budgetapp.app.Budget;
 import org.budget.tracker.budgetapp.builder.BudgetBuilder;
 import org.budget.tracker.budgetapp.db.JBudget;
@@ -19,6 +21,8 @@ import java.util.Optional;
 
 @Service
 public class BudgetServiceImpl implements BudgetService {
+
+  private final Logger logger = LogManager.getLogger(this.getClass());
 
   @Autowired BudgetJpaRepository budgetJpaRepository;
 
