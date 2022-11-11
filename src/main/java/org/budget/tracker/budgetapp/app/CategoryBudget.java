@@ -10,7 +10,6 @@ public class CategoryBudget extends BaseAppEntity {
   private Boolean userDefined;
   private BigDecimal allocated;
   private BigDecimal used;
-
   private Integer budgetId;
   private LocalDateTime lastUpdated;
   // TODO last operation
@@ -18,6 +17,8 @@ public class CategoryBudget extends BaseAppEntity {
   private Boolean autoDeduct;
 
   private LocalDate autoDeductOn;
+
+  private String subCategory;
 
   public String getName() {
     return name;
@@ -81,5 +82,13 @@ public class CategoryBudget extends BaseAppEntity {
 
   public void setBudgetId(Integer budgetId) {
     this.budgetId = budgetId;
+  }
+
+  public String getSubCategory() {
+    return subCategory;
+  }
+
+  public void setSubCategory(String subCategory) {
+    this.subCategory = subCategory;
   }
 }

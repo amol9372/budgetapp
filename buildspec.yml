@@ -6,16 +6,9 @@ env:
     DOCKER_PASSWORD: "/CodeBuild/applications/expense-tracker-app/docker/password"
 
 phases:
-#  install:
-#    runtime-versions:
-#      docker: 18
-#    commands:
-#      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2&
-#      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   install:
     commands:
       - echo "Copying settings.xml from S3"
-      - ls /root/.m2/
       - aws s3 cp s3://budgetapp-configuration/maven/settings.xml /root/.m2/
   pre_build:
     commands:
@@ -46,6 +39,5 @@ artifacts:
     - scripts/load_image.sh
     - scripts/start_container.sh
     - scripts/delete_previous_version.sh
-#    - docker_build/tasker.tar.gz
   discard-paths : yes
   # base-directory : docker_build

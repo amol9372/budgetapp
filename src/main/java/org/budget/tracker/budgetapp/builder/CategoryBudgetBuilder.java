@@ -33,6 +33,7 @@ public class CategoryBudgetBuilder {
               categoryBudget.setAllocated(BigDecimal.valueOf(jCategoryBudget.getAllocated()));
               categoryBudget.setName(categoryMap.get(jCategoryBudget.getCategoryId()));
               categoryBudget.setBudgetId(jCategoryBudget.getBudgetId());
+              categoryBudget.setSubCategory(jCategoryBudget.getSubCategory());
               categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
               categoryBudget.setUserDefined(jCategoryBudget.getUserDefined());
               categoryBudget.setAutoDeduct(jCategoryBudget.getAutoDeduct());

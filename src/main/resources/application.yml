@@ -37,8 +37,15 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: false
+  kafka:
+    listener:
+      poll-timeout: 10000
+    consumer:
+      heartbeat-interval: 10000
+
+
 
 logging:
   level:
-    root: debug
+    root: info
 

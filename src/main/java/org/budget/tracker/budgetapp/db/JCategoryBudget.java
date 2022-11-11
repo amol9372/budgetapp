@@ -21,6 +21,9 @@ public class JCategoryBudget {
   @Column(name = "category_id")
   private Integer categoryId;
 
+  @Column(name = "sub_category")
+  private String subCategory;
+
   @Column(name = "allocated")
   private Double allocated;
 
@@ -117,5 +120,13 @@ public class JCategoryBudget {
 
   public void setAutoDeductOn(LocalDate autoDeductOn) {
     this.autoDeductOn = autoDeductOn;
+  }
+
+  public String getSubCategory() {
+    return subCategory;
+  }
+
+  public void setSubCategory(String subCategory) {
+    this.subCategory = subCategory;
   }
 }

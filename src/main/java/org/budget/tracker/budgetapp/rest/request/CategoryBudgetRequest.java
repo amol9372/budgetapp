@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class CategoryBudgetRequest extends BaseRequest {
 
   private String category;
+  private String subCategory;
   private Boolean userDefined;
   private BigDecimal allocated;
   private BigDecimal used;
@@ -19,6 +20,14 @@ public class CategoryBudgetRequest extends BaseRequest {
 
   public void setCategory(String category) {
     this.category = category;
+  }
+
+  public String getSubCategory() {
+    return subCategory;
+  }
+
+  public void setSubCategory(String subCategory) {
+    this.subCategory = subCategory;
   }
 
   public Boolean getUserDefined() {

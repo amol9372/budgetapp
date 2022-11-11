@@ -21,6 +21,7 @@ public class BudgetBuilder {
     // jCategoryBudget.setId(request.getId());
     jCategoryBudget.setBudgetId(request.getBudgetId());
     jCategoryBudget.setId(request.getId());
+    jCategoryBudget.setSubCategory(request.getSubCategory());
     jCategoryBudget.setAllocated(request.getAllocated().doubleValue());
     jCategoryBudget.setUsed(request.getUsed().doubleValue());
     jCategoryBudget.setUserDefined(request.getUserDefined());
