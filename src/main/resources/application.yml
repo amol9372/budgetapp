@@ -43,7 +43,8 @@ spring:
     consumer:
       heartbeat-interval: 10000
 
-
+kafka:
+  bootstrap: ${KAFKA_BOOTSTRAP_SERVER}
 
 logging:
   level:

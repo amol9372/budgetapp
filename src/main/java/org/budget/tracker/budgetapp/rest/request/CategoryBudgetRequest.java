@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 public class CategoryBudgetRequest extends BaseRequest {
 
+  private String name;
   private String category;
   private String subCategory;
   private Boolean userDefined;
@@ -76,5 +77,13 @@ public class CategoryBudgetRequest extends BaseRequest {
 
   public void setUsed(BigDecimal used) {
     this.used = used;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

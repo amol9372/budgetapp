@@ -8,6 +8,10 @@ public class Expense {
   private String name;
   private BigDecimal cost;
   private String category;
+  private Integer categoryId;
+
+  private Integer budgetId;
+  private String subCategory;
   private String paidBy;
   private String group;
   private String createdBy;
@@ -69,12 +73,37 @@ public class Expense {
     this.createdOn = createdOn;
   }
 
+  public String getSubCategory() {
+    return subCategory;
+  }
+
+  public void setSubCategory(String subCategory) {
+    this.subCategory = subCategory;
+  }
+
+  public Integer getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(Integer categoryId) {
+    this.categoryId = categoryId;
+  }
+
+  public Integer getBudgetId() {
+    return budgetId;
+  }
+
+  public void setBudgetId(Integer budgetId) {
+    this.budgetId = budgetId;
+  }
+
   @Override
   public String toString() {
     return "Expense{" +
             "name='" + name + '\'' +
             ", cost=" + cost +
             ", category='" + category + '\'' +
+            ", subCategory='" + subCategory + '\'' +
             ", paidBy='" + paidBy + '\'' +
             ", group='" + group + '\'' +
             ", createdBy='" + createdBy + '\'' +

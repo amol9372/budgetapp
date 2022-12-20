@@ -3,6 +3,7 @@ package org.budget.tracker.budgetapp.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.budget.tracker.budgetapp.app.CategoryBudget;
+import org.budget.tracker.budgetapp.app.ExpenseCategory;
 import org.budget.tracker.budgetapp.builder.BudgetBuilder;
 import org.budget.tracker.budgetapp.builder.CategoryBudgetBuilder;
 import org.budget.tracker.budgetapp.db.JBudget;
@@ -21,6 +22,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryBudgetServiceImpl implements BudgetCategoryService {
@@ -64,14 +66,24 @@ public class CategoryBudgetServiceImpl implements BudgetCategoryService {
 
   @Override
   @Transactional
-  public void editBudgetCategory(Integer categoryId, CategoryBudgetRequest request) {
+  public CategoryBudget editBudgetCategory(Integer categoryId, CategoryBudgetRequest request) {
 
     JCategoryBudget jCategoryBudget = categoryBudgetJpaRepository.findById(categoryId).get();
     var previousAllocation = jCategoryBudget.getAllocated();
-    jCategoryBudget.setAllocated(request.getAllocated().doubleValue());
-    categoryBudgetJpaRepository.save(jCategoryBudget);
+    var prevAvailable = jCategoryBudget.getUsed();
 
+    jCategoryBudget.setAllocated(request.getAllocated().doubleValue());
+
+    if (previousAllocation > request.getAllocated().doubleValue()) {
+      jCategoryBudget.setUsed(prevAvailable - (previousAllocation - request.getAllocated().doubleValue()));
+    } else {
+      jCategoryBudget.setUsed(prevAvailable + (request.getAllocated().doubleValue()) - previousAllocation);
+    }
+
+    var savedCategoryBudget = categoryBudgetJpaRepository.save(jCategoryBudget);
     updateBudget(request, previousAllocation);
+
+    return CategoryBudgetBuilder.with(savedCategoryBudget,request);
   }
 
   @Override
@@ -110,6 +122,45 @@ public class CategoryBudgetServiceImpl implements BudgetCategoryService {
           budget.setMoneyAvailable(budget.getMoneyAvailable() + jCategoryBudget.getAllocated());
           budgetJpaRepository.save(budget);
         });
+  }
+
+  @Override
+  public List<ExpenseCategory> getCategories(Integer budgetId) {
+    var categoryBudgets = getCategoryBudgets(budgetId);
+
+    var categoryMap =
+        categoryBudgets.stream()
+            .filter(category -> category.getSubCategory() != null)
+            .collect(Collectors.groupingBy(CategoryBudget::getSubCategory));
+    //                    Collectors.mapping(CategoryBudget::getName, Collectors.toList())));
+
+    return categoryMap.entrySet().stream()
+        .map(
+            category -> {
+              var expenseCategory = new ExpenseCategory();
+              var id = category.getValue().get(0).getId();
+              expenseCategory.setId(id);
+              expenseCategory.setName(category.getKey());
+              expenseCategory.setSubCategories(
+                  category.getValue().stream()
+                      .map(CategoryBudget::getName)
+                      .collect(Collectors.toList()));
+              return expenseCategory;
+            })
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional
+  public Integer createExpenseCategory(CategoryBudgetRequest request){
+
+    Integer categoryId;
+    var userCategory = createUserCategory(request);
+    categoryId = userCategory.getId();
+
+    JCategoryBudget jCategoryBudget = BudgetBuilder.with(request);
+    jCategoryBudget.setCategoryId(categoryId);
+    return categoryBudgetJpaRepository.save(jCategoryBudget).getId();
   }
 
   private void updateBudget(CategoryBudgetRequest request, Double previousAllocation) {

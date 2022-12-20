@@ -27,6 +27,9 @@ public class JCategoryBudget {
   @Column(name = "allocated")
   private Double allocated;
 
+  @Column(name = "available")
+  private Double available;
+
   @Column(name = "used")
   private Double used;
 
@@ -128,5 +131,13 @@ public class JCategoryBudget {
 
   public void setSubCategory(String subCategory) {
     this.subCategory = subCategory;
+  }
+
+  public Double getAvailable() {
+    return available;
+  }
+
+  public void setAvailable(Double available) {
+    this.available = available;
   }
 }
