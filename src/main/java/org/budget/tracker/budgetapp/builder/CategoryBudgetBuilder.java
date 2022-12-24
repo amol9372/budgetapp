@@ -26,41 +26,42 @@ public class CategoryBudgetBuilder {
             jUserCategoryList.forEach(
                 jUserCategory -> categoryMap.put(jUserCategory.getId(), jUserCategory.getName())));
 
-    return jCategoryBudgets.stream()
-        .map(
-            jCategoryBudget -> {
-              var categoryBudget = new CategoryBudget();
-              categoryBudget.setId(jCategoryBudget.getId());
-              categoryBudget.setAllocated(BigDecimal.valueOf(jCategoryBudget.getAllocated()));
-              categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
-              categoryBudget.setName(categoryMap.get(jCategoryBudget.getCategoryId()));
-              categoryBudget.setBudgetId(jCategoryBudget.getBudgetId());
-              categoryBudget.setSubCategory(jCategoryBudget.getSubCategory());
-              categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
-              categoryBudget.setUserDefined(jCategoryBudget.getUserDefined());
-              categoryBudget.setAutoDeduct(jCategoryBudget.getAutoDeduct());
-              categoryBudget.setAutoDeductOn(jCategoryBudget.getAutoDeductOn());
-              categoryBudget.setLastUpdated(jCategoryBudget.getUpdatedOn());
-              return categoryBudget;
-            })
-        .collect(Collectors.toList());
+    return
+        jCategoryBudgets.stream()
+            .map(
+                jCategoryBudget -> {
+                  var categoryBudget = new CategoryBudget();
+                  categoryBudget.setId(jCategoryBudget.getId());
+                  categoryBudget.setAllocated(BigDecimal.valueOf(jCategoryBudget.getAllocated()));
+                  categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
+                  categoryBudget.setName(categoryMap.get(jCategoryBudget.getCategoryId()));
+                  categoryBudget.setBudgetId(jCategoryBudget.getBudgetId());
+                  categoryBudget.setSubCategory(jCategoryBudget.getSubCategory());
+                  categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
+                  categoryBudget.setUserDefined(jCategoryBudget.getUserDefined());
+                  categoryBudget.setAutoDeduct(jCategoryBudget.getAutoDeduct());
+                  categoryBudget.setAutoDeductOn(jCategoryBudget.getAutoDeductOn());
+                  categoryBudget.setLastUpdated(jCategoryBudget.getUpdatedOn());
+                  return categoryBudget;
+                })
+            .collect(Collectors.toList());
   }
 
-    public static CategoryBudget with(JCategoryBudget jCategoryBudget, CategoryBudgetRequest request) {
+  public static CategoryBudget with(
+      JCategoryBudget jCategoryBudget, CategoryBudgetRequest request) {
 
-        var categoryBudget = new CategoryBudget();
-        categoryBudget.setId(jCategoryBudget.getId());
-        categoryBudget.setAllocated(BigDecimal.valueOf(jCategoryBudget.getAllocated()));
-        categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
-        categoryBudget.setName(request.getName());
-        categoryBudget.setBudgetId(jCategoryBudget.getBudgetId());
-        categoryBudget.setSubCategory(jCategoryBudget.getSubCategory());
-        categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
-        categoryBudget.setUserDefined(jCategoryBudget.getUserDefined());
-        categoryBudget.setAutoDeduct(jCategoryBudget.getAutoDeduct());
-        categoryBudget.setAutoDeductOn(jCategoryBudget.getAutoDeductOn());
-        categoryBudget.setLastUpdated(jCategoryBudget.getUpdatedOn());
-        return categoryBudget;
-
-    }
+    var categoryBudget = new CategoryBudget();
+    categoryBudget.setId(jCategoryBudget.getId());
+    categoryBudget.setAllocated(BigDecimal.valueOf(jCategoryBudget.getAllocated()));
+    categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
+    categoryBudget.setName(request.getName());
+    categoryBudget.setBudgetId(jCategoryBudget.getBudgetId());
+    categoryBudget.setSubCategory(jCategoryBudget.getSubCategory());
+    categoryBudget.setUsed(BigDecimal.valueOf(jCategoryBudget.getUsed()));
+    categoryBudget.setUserDefined(jCategoryBudget.getUserDefined());
+    categoryBudget.setAutoDeduct(jCategoryBudget.getAutoDeduct());
+    categoryBudget.setAutoDeductOn(jCategoryBudget.getAutoDeductOn());
+    categoryBudget.setLastUpdated(jCategoryBudget.getUpdatedOn());
+    return categoryBudget;
+  }
 }

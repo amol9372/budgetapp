@@ -3,6 +3,7 @@ package org.budget.tracker.budgetapp.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.budget.tracker.budgetapp.app.CategoryBudget;
+import org.budget.tracker.budgetapp.app.CategoryBudgetResponse;
 import org.budget.tracker.budgetapp.app.ExpenseCategory;
 import org.budget.tracker.budgetapp.builder.BudgetBuilder;
 import org.budget.tracker.budgetapp.builder.CategoryBudgetBuilder;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -75,19 +77,21 @@ public class CategoryBudgetServiceImpl implements BudgetCategoryService {
     jCategoryBudget.setAllocated(request.getAllocated().doubleValue());
 
     if (previousAllocation > request.getAllocated().doubleValue()) {
-      jCategoryBudget.setUsed(prevAvailable - (previousAllocation - request.getAllocated().doubleValue()));
+      jCategoryBudget.setUsed(
+          prevAvailable - (previousAllocation - request.getAllocated().doubleValue()));
     } else {
-      jCategoryBudget.setUsed(prevAvailable + (request.getAllocated().doubleValue()) - previousAllocation);
+      jCategoryBudget.setUsed(
+          prevAvailable + (request.getAllocated().doubleValue()) - previousAllocation);
     }
 
     var savedCategoryBudget = categoryBudgetJpaRepository.save(jCategoryBudget);
     updateBudget(request, previousAllocation);
 
-    return CategoryBudgetBuilder.with(savedCategoryBudget,request);
+    return CategoryBudgetBuilder.with(savedCategoryBudget, request);
   }
 
-  @Override
-  public List<CategoryBudget> getCategoryBudgets(Integer budgetId) {
+  // @Override
+  private List<CategoryBudget> getCategoryBudgetsV1(Integer budgetId) {
 
     // if user_categories table is empty, get from categories table
     List<JCategoryBudget> jCategoryBudgets = categoryBudgetJpaRepository.findByBudgetId(budgetId);
@@ -96,6 +100,43 @@ public class CategoryBudgetServiceImpl implements BudgetCategoryService {
         userCategoryJpaRepository.findByBudgetId(budgetId);
 
     return CategoryBudgetBuilder.with(jCategoryBudgets, jCategories, jUserCategories);
+  }
+
+  @Override
+  public List<CategoryBudgetResponse> getCategoryBudgets(Integer budgetId) {
+
+    // if user_categories table is empty, get from categories table
+    List<JCategoryBudget> jCategoryBudgets = categoryBudgetJpaRepository.findByBudgetId(budgetId);
+    List<JCategory> jCategories = categoryJpaRepository.findAll();
+    Optional<List<JUserCategory>> jUserCategories =
+        userCategoryJpaRepository.findByBudgetId(budgetId);
+
+    var categoryBudgets =
+        CategoryBudgetBuilder.with(jCategoryBudgets, jCategories, jUserCategories);
+
+    return categoryBudgets.stream()
+        .map(
+            categoryBudget -> {
+              if (Objects.isNull(categoryBudget.getSubCategory())) {
+                categoryBudget.setSubCategory("essentials");
+              }
+              return categoryBudget;
+            })
+        .collect(Collectors.groupingBy(CategoryBudget::getSubCategory))
+        .entrySet()
+        .stream()
+        .map(
+            entry -> {
+              var categoryBudgetResponse = new CategoryBudgetResponse();
+              if (Objects.isNull(entry.getKey())) {
+                categoryBudgetResponse.setSubCategory("essentials");
+              } else {
+                categoryBudgetResponse.setSubCategory(entry.getKey());
+              }
+              categoryBudgetResponse.setCategoryBudgets(entry.getValue());
+              return categoryBudgetResponse;
+            })
+        .collect(Collectors.toList());
   }
 
   @Override
@@ -126,7 +167,7 @@ public class CategoryBudgetServiceImpl implements BudgetCategoryService {
 
   @Override
   public List<ExpenseCategory> getCategories(Integer budgetId) {
-    var categoryBudgets = getCategoryBudgets(budgetId);
+    var categoryBudgets = getCategoryBudgetsV1(budgetId);
 
     var categoryMap =
         categoryBudgets.stream()
@@ -152,7 +193,7 @@ public class CategoryBudgetServiceImpl implements BudgetCategoryService {
 
   @Override
   @Transactional
-  public Integer createExpenseCategory(CategoryBudgetRequest request){
+  public Integer createExpenseCategory(CategoryBudgetRequest request) {
 
     Integer categoryId;
     var userCategory = createUserCategory(request);

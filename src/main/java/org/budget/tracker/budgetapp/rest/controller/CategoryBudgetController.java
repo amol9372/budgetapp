@@ -1,6 +1,7 @@
 package org.budget.tracker.budgetapp.rest.controller;
 
 import org.budget.tracker.budgetapp.app.CategoryBudget;
+import org.budget.tracker.budgetapp.app.CategoryBudgetResponse;
 import org.budget.tracker.budgetapp.app.ExpenseCategory;
 import org.budget.tracker.budgetapp.rest.request.CategoryBudgetRequest;
 import org.budget.tracker.budgetapp.service.BudgetCategoryService;
@@ -38,7 +39,7 @@ public class CategoryBudgetController {
   }
 
   @GetMapping("{budgetId}")
-  public List<CategoryBudget> fetchCategoryBudgets(@PathVariable Integer budgetId) {
+  public List<CategoryBudgetResponse> fetchCategoryBudgets(@PathVariable Integer budgetId) {
 
     return budgetCategoryService.getCategoryBudgets(budgetId);
   }

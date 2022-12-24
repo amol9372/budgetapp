@@ -1,6 +1,7 @@
 package org.budget.tracker.budgetapp.service;
 
 import org.budget.tracker.budgetapp.app.CategoryBudget;
+import org.budget.tracker.budgetapp.app.CategoryBudgetResponse;
 import org.budget.tracker.budgetapp.app.ExpenseCategory;
 import org.budget.tracker.budgetapp.rest.request.CategoryBudgetRequest;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public interface BudgetCategoryService {
 
   void createBudgetCategory(CategoryBudgetRequest request);
 
-  List<CategoryBudget> getCategoryBudgets(Integer budgetId);
+  List<CategoryBudgetResponse> getCategoryBudgets(Integer budgetId);
 
   List<ExpenseCategory> getCategories(Integer budgetId);
 
