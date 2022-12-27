@@ -55,12 +55,12 @@ public class KafkaConsumer {
     jCategoryBudget.setUsed(used);
     categoryBudgetJpaRepository.save(jCategoryBudget);
 
-    Optional<JBudget> jBudget = budgetJpaRepository.findById(expense.getBudgetId());
-    jBudget.ifPresent(
-            budget -> {
-              budget.setMoneyAvailable(budget.getMoneyAvailable() - jCategoryBudget.getAllocated());
-              budgetJpaRepository.save(budget);
-            });
+//    Optional<JBudget> jBudget = budgetJpaRepository.findById(expense.getBudgetId());
+//    jBudget.ifPresent(
+//            budget -> {
+//              budget.setMoneyAvailable(budget.getMoneyAvailable() - jCategoryBudget.getAllocated());
+//              budgetJpaRepository.save(budget);
+//            });
 
   }
 }
